@@ -30,6 +30,14 @@ async function run() {
       .db("a10Database")
       .collection("a10Products");
 
+    app.get("/products/:brand", async (req, res) => {
+      const brand = req.params.brand;
+      const query = { brand: `${brand}` };
+      const cursor = productCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
     app.post("/products", async (req, res) => {
       newProduct = req.body;
       console.log(newProduct);
