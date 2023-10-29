@@ -37,7 +37,7 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     });
-
+    //24 product data added
     app.post("/products", async (req, res) => {
       newProduct = req.body;
       console.log(newProduct);
