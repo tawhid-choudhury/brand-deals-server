@@ -29,6 +29,7 @@ async function run() {
     const productCollection = client
       .db("a10Database")
       .collection("a10Products");
+    const cartCollection = client.db("a10Database").collection("a10UserCarts");
 
     // get all product from same brand
     app.get("/products/:brand", async (req, res) => {
@@ -76,6 +77,14 @@ async function run() {
       newProduct = req.body;
       console.log(newProduct);
       const result = await productCollection.insertOne(newProduct);
+      res.send(result);
+    });
+
+    // CART FUNCTIONS
+    app.post("/carts", async (req, res) => {
+      newAdd = req.body;
+      console.log(newAdd);
+      const result = await cartCollection.insertOne(newAdd);
       res.send(result);
     });
 
