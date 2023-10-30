@@ -81,6 +81,14 @@ async function run() {
     });
 
     // CART FUNCTIONS
+    app.get("/carts/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email: `${email}` };
+      const cursor = cartCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
     app.post("/carts", async (req, res) => {
       newAdd = req.body;
       console.log(newAdd);
